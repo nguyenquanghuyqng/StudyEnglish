@@ -44,7 +44,7 @@ public class ListVideo {
 	private void initialize() {
 		// Tạo form chính
 		frmListVideo = new JFrame("English pronunciation");
-		frmListVideo.setBounds(300, 80, 800, 600);
+		frmListVideo.setBounds(300, 80, 800, 500);
 		frmListVideo.getContentPane().setLayout(null);
 
 		// Panel

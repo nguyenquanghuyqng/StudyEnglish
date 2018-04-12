@@ -1,17 +1,14 @@
 package View;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
-import java.awt.BorderLayout;
 
-public class HomeStudy {
+public class ReviewStudy {
 
 	private JFrame frame;
 
@@ -22,7 +19,7 @@ public class HomeStudy {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HomeStudy window = new HomeStudy();
+					ReviewStudy window = new ReviewStudy();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +31,7 @@ public class HomeStudy {
 	/**
 	 * Create the application.
 	 */
-	public HomeStudy() {
+	public ReviewStudy() {
 		initialize();
 	}
 
@@ -43,30 +40,14 @@ public class HomeStudy {
 	 */
 	private void initialize() {
 		frame = new JFrame("English pronunciation");
-		frame.setBounds(300, 80, 800, 500);
+		frame.setBounds(300, 80, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-		
-		JMenu mnHome = new JMenu("Home");
-		menuBar.add(mnHome);
-		
-		JMenu mnListVideo = new JMenu("List Video");
-		menuBar.add(mnListVideo);
-		
-		JMenu mnAbout = new JMenu("About");
-		menuBar.add(mnAbout);
-		
-		JMenuItem mntmHelp = new JMenuItem("Help");
-		mnAbout.add(mntmHelp);
-		
-		// Panel
 		JPanel HomePage = new JPanel();
 		HomePage.setBorder(new TitledBorder(null, "Pronunciation", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		frame.setFont(new Font("Tahoma",Font.BOLD,16));
-		HomePage.setBounds(10, 11, 760, 426);
+		HomePage.setBounds(10, 11, 760, 539);
 		frame.getContentPane().add(HomePage, BorderLayout.NORTH);
 		HomePage.setLayout(null);
 		
@@ -81,6 +62,11 @@ public class HomeStudy {
 		Sub.setBounds(490, 22, 260, 377);
 		HomePage.add(Sub);
 		Sub.setLayout(null);
-
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Replay", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 410, 740, 118);
+		HomePage.add(panel);
 	}
+
 }
