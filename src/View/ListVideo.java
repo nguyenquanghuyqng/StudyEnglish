@@ -51,7 +51,7 @@ public class ListVideo {
 		JPanel HomePage = new JPanel();
 		HomePage.setBorder(new TitledBorder(null, "List video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		// Login.setFont(new Font("Tahoma",Font.BOLD,16));
-		HomePage.setBounds(12, 10, 760, 418);
+		HomePage.setBounds(10, 11, 760, 418);
 		frmListVideo.getContentPane().add(HomePage);
 		HomePage.setLayout(null);
 
@@ -69,7 +69,7 @@ public class ListVideo {
 
 		frmListVideo.setJMenuBar(mb);
 		frmListVideo.setBounds(320, 80, 800, 500);
-		frmListVideo.setLayout(null);
+		frmListVideo.getContentPane().setLayout(null);
 	}
 
 }
