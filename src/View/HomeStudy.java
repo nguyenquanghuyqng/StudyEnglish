@@ -88,14 +88,14 @@ public class HomeStudy {
 		frame.getContentPane().add(HomePage, BorderLayout.NORTH);
 		HomePage.setLayout(null);
 
-		// Créer une instance de Canvas
+		// Khởi tạo Canvas
 		Canvas c = new Canvas();
-		// L'arrière plan de la vidéo est noir par défaut
+		// Set background
 		c.setBackground(Color.black);
 
 		JPanel Video = new JPanel();
 		Video.setBorder(new TitledBorder(null, "Video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		Video.setBounds(10, 22, 470, 377);
+		Video.setBounds(10, 22, 470, 282);
 		Video.setLayout(new BorderLayout());
 		Video.add(c, BorderLayout.CENTER);
 		
@@ -109,11 +109,9 @@ public class HomeStudy {
 		HomePage.add(Sub);
 		Sub.setLayout(null);
 
-		// La vidéo prend toute la surface
-
-		// Créer une instance factory
+		// Khởi tạo MediaPlayerFactory
 		MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
-		// Créer une instance lecteur média
+		// Tạo một thể loại media player
 		EmbeddedMediaPlayer mediaPlayer = mediaPlayerFactory.newEmbeddedMediaPlayer(new Win32FullScreenStrategy(frame));
 		mediaPlayer.setVideoSurface(mediaPlayerFactory.newVideoSurface(c));
 
@@ -123,7 +121,7 @@ public class HomeStudy {
 		// Set chế độ thao tác chuột trên video
 		// mediaPlayer.setEnableMouseInputHandling(false);
 
-		// Désactiver le clavier à l'intérieur de JFrame
+		// Tắt bàn phím bên trong JFrame
 		mediaPlayer.setEnableKeyInputHandling(true);
 
 		// Préparer le fichier
