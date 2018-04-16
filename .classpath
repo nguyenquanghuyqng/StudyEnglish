@@ -2,5 +2,11 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="D:/DOCUMENT/ECLIPSE/StudyEnglish/lib/jmf-2_1_1e-alljava/JMF-2.1.1e/lib/jmf.jar"/>
+	<classpathentry kind="lib" path="D:/DOCUMENT/ECLIPSE/StudyEnglish/lib/movieplayer.jar"/>
+	<classpathentry kind="lib" path="D:/DOCUMENT/ECLIPSE/StudyEnglish/lib/org.eclipse.swt.win32.win32.x86-3.5.1.jar"/>
+	<classpathentry kind="lib" path="D:/DOCUMENT/ECLIPSE/StudyEnglish/lib/DJNativeSwing.jar"/>
+	<classpathentry kind="lib" path="D:/DOCUMENT/ECLIPSE/StudyEnglish/lib/mysql-connector-java-5.0.8-bin.jar"/>
+	<classpathentry kind="lib" path="D:/DOCUMENT/ECLIPSE/StudyEnglish/lib/vlcj-3.0.1-dist/vlcj-3.0.1-dist/vlcj-3.0.1/vlcj-3.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -58,16 +58,18 @@ public class ListVideo {
 		
 		// Tạo form chính
 		frmListVideo = new JFrame("English pronunciation");
+		frmListVideo.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
 		frmListVideo.getContentPane().setBackground(new Color(30, 144, 255));
 		frmListVideo.setBounds(300, 80, 800, 500);
 		frmListVideo.getContentPane().setLayout(null);
+		frmListVideo.setLocationRelativeTo(null);
 
 		// Panel
 		JPanel HomePage = new JPanel();
 		HomePage.setBackground(new Color(224, 255, 255));
 		HomePage.setBorder(new TitledBorder(null, "List video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		// Login.setFont(new Font("Tahoma",Font.BOLD,16));
-		HomePage.setBounds(10, 11, 760, 418);
+		HomePage.setFont(new Font("Tahoma",Font.BOLD,20));
+		HomePage.setBounds(10, 11, 764, 418);
 		frmListVideo.getContentPane().add(HomePage);
 		HomePage.setLayout(null);
 		
