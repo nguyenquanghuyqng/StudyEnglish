@@ -1,13 +1,22 @@
 package View;
 
+import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
+
+import Dao.GetListVideo;
+import Model.Video;
+import java.awt.SystemColor;
 
 public class ListVideo {
 
@@ -42,18 +51,90 @@ public class ListVideo {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		List<Video> list = GetListVideo.GetList();
+		
+		
+		
 		// Tạo form chính
 		frmListVideo = new JFrame("English pronunciation");
+		frmListVideo.getContentPane().setBackground(new Color(30, 144, 255));
 		frmListVideo.setBounds(300, 80, 800, 500);
 		frmListVideo.getContentPane().setLayout(null);
 
 		// Panel
 		JPanel HomePage = new JPanel();
+		HomePage.setBackground(new Color(224, 255, 255));
 		HomePage.setBorder(new TitledBorder(null, "List video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		// Login.setFont(new Font("Tahoma",Font.BOLD,16));
 		HomePage.setBounds(10, 11, 760, 418);
 		frmListVideo.getContentPane().add(HomePage);
 		HomePage.setLayout(null);
+		
+		Canvas video1 = new Canvas();
+		video1.setBackground(Color.YELLOW);
+		video1.setBounds(23, 44, 100, 100);
+		HomePage.add(video1);
+		
+		Canvas video2 = new Canvas();
+		video2.setBackground(Color.GREEN);
+		video2.setBounds(23, 168, 100, 100);
+		HomePage.add(video2);
+		
+		Canvas video3 = new Canvas();
+		video3.setBackground(Color.LIGHT_GRAY);
+		video3.setBounds(23, 292, 100, 100);
+		HomePage.add(video3);
+		
+		JLabel lblVideo1 = new JLabel("Video 1");
+		lblVideo1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblVideo1.setBounds(157, 44, 579, 38);
+		HomePage.add(lblVideo1);
+		
+		JLabel lblVideo2 = new JLabel("Video2\r\n");
+		lblVideo2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblVideo2.setBounds(157, 168, 579, 38);
+		HomePage.add(lblVideo2);
+		
+		JLabel lblVideo3 = new JLabel("Video2\r\n");
+		lblVideo3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblVideo3.setBounds(157, 292, 579, 38);
+		HomePage.add(lblVideo3);
+		
+		JLabel lblContent1 = new JLabel("Content1");
+		lblContent1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblContent1.setBounds(157, 93, 579, 29);
+		HomePage.add(lblContent1);
+		
+		JLabel lblContent2 = new JLabel("Content2");
+		lblContent2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblContent2.setBounds(157, 217, 579, 29);
+		HomePage.add(lblContent2);
+		
+		JLabel lblContent3 = new JLabel("Content3");
+		lblContent3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblContent3.setBounds(157, 339, 579, 29);
+		HomePage.add(lblContent3);
+		
+		for (Video video : list) {
+			
+			if(video.getId()==1) {
+				lblVideo1.setText(video.getVideoname());
+				lblContent1.setText(video.getContent());
+			}
+			else {
+				if(video.getId()==2) {
+					lblVideo2.setText(video.getVideoname());
+					lblContent2.setText(video.getContent());
+				}
+				else {
+					if(video.getId()==3) {
+						lblVideo3.setText(video.getVideoname());
+						lblContent3.setText(video.getContent());
+					}
+				}
+			}
+		}
 
 		JMenuBar mb = new JMenuBar(); // Tạo ra một menuBar
 
@@ -71,5 +152,4 @@ public class ListVideo {
 		frmListVideo.setBounds(320, 80, 800, 500);
 		frmListVideo.getContentPane().setLayout(null);
 	}
-
 }

@@ -15,7 +15,7 @@ import java.sql.DriverManager;
 public class DBConnection {
     // Driver and URL
     private static final String DRIVER_JDBC = "com.mysql.jdbc.Driver";
-    private static final String URL_DB = "jdbc:mysql://localhost/demologin";
+    private static final String URL_DB = "jdbc:mysql://localhost/internation";
     // Pass and User
     private static final String USER = "root";
     private static final String PASS = "12345";
