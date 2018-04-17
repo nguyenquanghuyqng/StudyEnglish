@@ -4,6 +4,10 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -14,9 +18,14 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
+
 import Dao.GetListVideo;
 import Model.Video;
-import java.awt.SystemColor;
+import uk.co.caprica.vlcj.binding.LibVlc;
+import uk.co.caprica.vlcj.runtime.RuntimeUtil;
+import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 
 public class ListVideo {
 
@@ -54,12 +63,10 @@ public class ListVideo {
 		
 		List<Video> list = GetListVideo.GetList();
 		
-		
-		
 		// Tạo form chính
 		frmListVideo = new JFrame("English pronunciation");
 		frmListVideo.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
-		frmListVideo.getContentPane().setBackground(new Color(30, 144, 255));
+		frmListVideo.getContentPane().setBackground(new Color(153, 153, 255));
 		frmListVideo.setBounds(300, 80, 800, 500);
 		frmListVideo.getContentPane().setLayout(null);
 		frmListVideo.setLocationRelativeTo(null);
@@ -105,17 +112,17 @@ public class ListVideo {
 		
 		JLabel lblContent1 = new JLabel("Content1");
 		lblContent1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblContent1.setBounds(157, 93, 579, 29);
+		lblContent1.setBounds(157, 84, 579, 29);
 		HomePage.add(lblContent1);
 		
 		JLabel lblContent2 = new JLabel("Content2");
 		lblContent2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblContent2.setBounds(157, 217, 579, 29);
+		lblContent2.setBounds(157, 208, 579, 29);
 		HomePage.add(lblContent2);
 		
 		JLabel lblContent3 = new JLabel("Content3");
 		lblContent3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblContent3.setBounds(157, 339, 579, 29);
+		lblContent3.setBounds(157, 332, 579, 29);
 		HomePage.add(lblContent3);
 		
 		for (Video video : list) {
@@ -138,10 +145,51 @@ public class ListVideo {
 			}
 		}
 
+		
+		
+		// Bắt sự kiện click
+		lblVideo1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				chargerLibrairie();
+				HomeStudy hs = new HomeStudy();
+				hs.frame.setVisible(true);
+			}
+		});
+		
 		JMenuBar mb = new JMenuBar(); // Tạo ra một menuBar
 
 		Home = new JMenu("Home");
+		Home.setActionCommand("Home");
+		
 		ListVideo = new JMenu("List video");
+		ListVideo.setActionCommand("ListVideo");
+		
 		About = new JMenu("About");
 		Help = new JMenuItem("Help");
 		About.add(Help);
@@ -153,5 +201,35 @@ public class ListVideo {
 		frmListVideo.setJMenuBar(mb);
 		frmListVideo.setBounds(320, 80, 800, 500);
 		frmListVideo.getContentPane().setLayout(null);
+		
+		 // Tạo ra MenuItemListener để bắt sự kiện 
+        MenuItemListener menuItemListener = new MenuItemListener();
+        
+		
+		
+		
 	}
+	private static void chargerLibrairie() {
+		NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(), "C:/Program Files/VideoLAN/VLC");
+		Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
+		LibXUtil.initialise();
+	}
+	
+	// Bắt sự kiện cho  từng  menuItem
+    public class MenuItemListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            // Kiêm tra khi click vào các menuItem
+            if (e.getSource() == Home) {
+                Home home = new Home();
+                home.frmHome.setVisible(true);
+//                frmListVideo.setVisible(false);
+            }
+            if (e.getSource() == ListVideo) {
+            	ListVideo lv = new ListVideo();
+                lv.frmListVideo.setVisible(true);
+            }
+            
+        }
+    }
 }

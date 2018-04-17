@@ -3,10 +3,16 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -26,7 +32,8 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 
 public class HomeStudy {
 
-	private JFrame frame;
+	JFrame frame;
+	int t = 0; // Biến để play video or pause video
 
 	/**
 	 * Launch the application.
@@ -60,6 +67,7 @@ public class HomeStudy {
 	private void initialize() {
 		frame = new JFrame("English pronunciation");
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
+		frame.getContentPane().setBackground(new Color(153, 153, 255));
 		frame.setBounds(300, 80, 800, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -84,6 +92,7 @@ public class HomeStudy {
 		JPanel HomePage = new JPanel();
 		HomePage.setBorder(new TitledBorder(null, "Pronunciation", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		HomePage.setFont(new Font("Tahoma", Font.BOLD, 16));
+		HomePage.setBackground(new Color(224, 255, 255));
 		HomePage.setBounds(10, 11, 760, 418);
 		frame.getContentPane().add(HomePage, BorderLayout.NORTH);
 		HomePage.setLayout(null);
@@ -93,15 +102,27 @@ public class HomeStudy {
 		// Set background
 		c.setBackground(Color.black);
 
+		// Nơi chứa video
 		JPanel Video = new JPanel();
-		Video.setBorder(new TitledBorder(null, "Video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		Video.setBounds(10, 22, 470, 282);
+		Video.setBounds(12, 30, 470, 290);
 		Video.setLayout(new BorderLayout());
 		Video.add(c, BorderLayout.CENTER);
-		
-		//frame.getContentPane().add(Video, BorderLayout.CENTER);
+
+		// frame.getContentPane().add(Video, BorderLayout.CENTER);
 		HomePage.add(Video, BorderLayout.CENTER);
 		// Video.setLayout(null);
+
+		JLabel lblbackward = new JLabel(new ImageIcon("Images/backward.png"));
+		lblbackward.setBounds(40, 330, 32, 32);
+		HomePage.add(lblbackward);
+
+		JLabel lblPlay = new JLabel(new ImageIcon("Images/pause.png"));
+		lblPlay.setBounds(100, 330, 32, 32);
+		HomePage.add(lblPlay);
+
+		JLabel lblforward = new JLabel(new ImageIcon("Images/forward.png"));
+		lblforward.setBounds(160, 330, 32, 32);
+		HomePage.add(lblforward);
 
 		JPanel Sub = new JPanel();
 		Sub.setBorder(new TitledBorder(null, "Sub", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -125,9 +146,118 @@ public class HomeStudy {
 		mediaPlayer.setEnableKeyInputHandling(true);
 
 		// Préparer le fichier
-		mediaPlayer.prepareMedia("Video/Video1.mp4");
+		mediaPlayer.prepareMedia("Video/Huy.mp4");
 		// lire le fichier
 		mediaPlayer.play();
+
+		// Sự kiện play or pause video
+		lblPlay.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (t == 0) {
+					lblPlay.setIcon(new ImageIcon("Images/play.png"));
+					mediaPlayer.pause();
+					t = 1;
+				} else {
+					lblPlay.setIcon(new ImageIcon("Images/pause.png"));
+					mediaPlayer.play();
+					t = 0;
+				}
+
+			}
+		});
+
+		// Sự kiện tua nhanh
+		lblforward.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+			}
+		});
+
+		// Sự kiện tua chậm
+		lblbackward.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 	}
 

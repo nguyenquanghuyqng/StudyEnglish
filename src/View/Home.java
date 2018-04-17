@@ -14,7 +14,7 @@ import javax.swing.border.TitledBorder;
 
 public class Home {
 
-	private JFrame frmHome;
+	JFrame frmHome;
 
 	/**
 	 * Launch the application.
