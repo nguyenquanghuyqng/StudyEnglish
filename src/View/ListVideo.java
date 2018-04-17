@@ -179,6 +179,7 @@ public class ListVideo {
 				chargerLibrairie();
 				HomeStudy hs = new HomeStudy();
 				hs.frame.setVisible(true);
+//				frmListVideo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 		
@@ -204,9 +205,9 @@ public class ListVideo {
 		
 		 // Tạo ra MenuItemListener để bắt sự kiện 
         MenuItemListener menuItemListener = new MenuItemListener();
-        
-		
-		
+        Home.addActionListener(menuItemListener);
+        ListVideo.addActionListener(menuItemListener);
+        Help.addActionListener(menuItemListener);
 		
 	}
 	private static void chargerLibrairie() {

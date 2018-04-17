@@ -183,10 +183,15 @@ public class HomeStudy {
 					lblPlay.setIcon(new ImageIcon("Images/play.png"));
 					mediaPlayer.pause();
 					t = 1;
-				} else {
+				}
+				if(t==1){
 					lblPlay.setIcon(new ImageIcon("Images/pause.png"));
 					mediaPlayer.play();
 					t = 0;
+				}
+				else if(mediaPlayer != null){
+					lblPlay.setIcon(new ImageIcon("Images/again.png"));
+					t=1;
 				}
 
 			}
