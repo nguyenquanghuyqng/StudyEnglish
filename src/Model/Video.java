@@ -1,6 +1,9 @@
 package Model;
 
+import java.io.File;
 import java.sql.Time;
+
+import com.mysql.jdbc.Blob;
 
 public class Video {
 
@@ -8,11 +11,21 @@ public class Video {
 	private String videoname;
 	private String content;
 	private Time timepause;
-	private Byte image;
+	private String image;
 	private String link;
-	
+
+	public Video(int id, String videoname, String content, Time timepause, String image, String link) {
+		super();
+		this.id = id;
+		this.videoname = videoname;
+		this.content = content;
+		this.timepause = timepause;
+		this.image = image;
+		this.link = link;
+	}
+
 	public Video() {
-		
+
 	}
 
 	public int getId() {
@@ -47,11 +60,11 @@ public class Video {
 		this.timepause = timepause;
 	}
 
-	public Byte getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(Byte image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -60,16 +73,6 @@ public class Video {
 	}
 
 	public void setLink(String link) {
-		this.link = link;
-	}
-
-	public Video(int id, String videoname, String content, Time timepause, Byte image, String link) {
-		super();
-		this.id = id;
-		this.videoname = videoname;
-		this.content = content;
-		this.timepause = timepause;
-		this.image = image;
 		this.link = link;
 	}
 

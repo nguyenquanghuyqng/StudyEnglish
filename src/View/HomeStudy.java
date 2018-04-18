@@ -4,13 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -184,16 +181,11 @@ public class HomeStudy {
 					mediaPlayer.pause();
 					t = 1;
 				}
-				if(t==1){
+				else if(t==1){
 					lblPlay.setIcon(new ImageIcon("Images/pause.png"));
 					mediaPlayer.play();
 					t = 0;
 				}
-				else if(mediaPlayer != null){
-					lblPlay.setIcon(new ImageIcon("Images/again.png"));
-					t=1;
-				}
-
 			}
 		});
 

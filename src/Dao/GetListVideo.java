@@ -38,12 +38,12 @@ public class GetListVideo {
 				vd.setVideoname(rs.getString("videoname"));
 				vd.setContent(rs.getString("videoname"));
 				vd.setTimepause(rs.getTime("timepause"));
-				vd.setImage(rs.getByte("image"));
+				vd.setImage(rs.getString("image"));
 				vd.setLink(rs.getString("link"));
 				listvd.add(vd);
 			}
 		} catch (Exception ex) {
-			System.err.println("Error get data User" + ex);
+			System.err.println("Error get data video" + ex);
 		}
 		return listvd;
 	}
