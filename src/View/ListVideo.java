@@ -32,8 +32,8 @@ import uk.co.caprica.vlcj.runtime.x.LibXUtil;
 public class ListVideo {
 
 	public JFrame frmListVideo;
-	JMenu Home, ListVideo, About;
-	JMenuItem Help;
+	JMenu Home, Video, About;
+	JMenuItem HomePage, ListVideo, Library, Help;
 	// Biến để Browse Images
 	BufferedImage bi;
 
@@ -76,59 +76,59 @@ public class ListVideo {
 		frmListVideo.setLocationRelativeTo(null);
 
 		// Panel
-		JPanel HomePage = new JPanel();
-		HomePage.setBackground(new Color(224, 255, 255));
-		HomePage.setBorder(new TitledBorder(null, "List video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		HomePage.setFont(new Font("Tahoma", Font.BOLD, 20));
-		HomePage.setBounds(10, 11, 764, 418);
-		frmListVideo.getContentPane().add(HomePage);
-		HomePage.setLayout(null);
+		JPanel HomeP = new JPanel();
+		HomeP.setBackground(new Color(224, 255, 255));
+		HomeP.setBorder(new TitledBorder(null, "List video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		HomeP.setFont(new Font("Tahoma", Font.BOLD, 20));
+		HomeP.setBounds(10, 11, 764, 418);
+		frmListVideo.getContentPane().add(HomeP);
+		HomeP.setLayout(null);
 
 		JLabel video1 = new JLabel();
 		// video1.setBackground(Color.YELLOW);
 		video1.setIcon(new ImageIcon(""));
 		video1.setBounds(17, 44, 170, 95);
-		HomePage.add(video1);
+		HomeP.add(video1);
 
 		JLabel video2 = new JLabel();
 		video2.setBackground(Color.GREEN);
 		video2.setBounds(17, 168, 170, 95);
-		HomePage.add(video2);
+		HomeP.add(video2);
 
 		JLabel video3 = new JLabel();
 		video3.setBackground(Color.LIGHT_GRAY);
 		video3.setBounds(17, 292, 170, 95);
-		HomePage.add(video3);
+		HomeP.add(video3);
 
 		JLabel lblVideo1 = new JLabel("Video 1");
 		lblVideo1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblVideo1.setBounds(200, 44, 579, 38);
-		HomePage.add(lblVideo1);
+		HomeP.add(lblVideo1);
 
 		JLabel lblVideo2 = new JLabel("Video2\r\n");
 		lblVideo2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblVideo2.setBounds(200, 168, 579, 38);
-		HomePage.add(lblVideo2);
+		HomeP.add(lblVideo2);
 
 		JLabel lblVideo3 = new JLabel("Video3\r\n");
 		lblVideo3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblVideo3.setBounds(200, 292, 579, 38);
-		HomePage.add(lblVideo3);
+		HomeP.add(lblVideo3);
 
 		JLabel lblContent1 = new JLabel("Content1");
 		lblContent1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblContent1.setBounds(200, 85, 579, 29);
-		HomePage.add(lblContent1);
+		HomeP.add(lblContent1);
 
 		JLabel lblContent2 = new JLabel("Content2");
 		lblContent2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblContent2.setBounds(200, 208, 579, 29);
-		HomePage.add(lblContent2);
+		HomeP.add(lblContent2);
 
 		JLabel lblContent3 = new JLabel("Content3");
 		lblContent3.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblContent3.setBounds(205, 332, 579, 29);
-		HomePage.add(lblContent3);
+		HomeP.add(lblContent3);
 
 		for (Video video : list) {
 
@@ -152,7 +152,7 @@ public class ListVideo {
 					}
 				}
 			}
-			
+
 		}
 
 		// Bắt sự kiện click
@@ -192,7 +192,7 @@ public class ListVideo {
 				frmListVideo.dispatchEvent(new WindowEvent(frmListVideo, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		
+
 		lblVideo2.addMouseListener(new MouseListener() {
 
 			@Override
@@ -229,7 +229,7 @@ public class ListVideo {
 				frmListVideo.dispatchEvent(new WindowEvent(frmListVideo, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		
+
 		lblVideo3.addMouseListener(new MouseListener() {
 
 			@Override
@@ -268,18 +268,30 @@ public class ListVideo {
 
 		JMenuBar mb = new JMenuBar(); // Tạo ra một menuBar
 
-		Home = new JMenu("Home");
-		Home.setActionCommand("Home");
-
-		ListVideo = new JMenu("List video");
-		ListVideo.setActionCommand("ListVideo");
+		Video = new JMenu("Video");
+		Video.setActionCommand("ListVideo");
 
 		About = new JMenu("About");
 		Help = new JMenuItem("Help");
+		Help.setActionCommand("Help");
 		About.add(Help);
 
+		Home = new JMenu("Home");
+		Home.setActionCommand("Home");
+
 		mb.add(Home);
-		mb.add(ListVideo);
+
+		HomePage = new JMenuItem("Home Page");
+		Home.add(HomePage);
+
+		// Tạo các sự kiện cho các menuItem
+		mb.add(Video);
+
+		ListVideo = new JMenuItem("List Video");
+		Video.add(ListVideo);
+
+		Library = new JMenuItem("Library");
+		Video.add(Library);
 		mb.add(About);
 
 		frmListVideo.setJMenuBar(mb);
@@ -288,8 +300,9 @@ public class ListVideo {
 
 		// Tạo ra MenuItemListener để bắt sự kiện
 		MenuItemListener menuItemListener = new MenuItemListener();
-		Home.addActionListener(menuItemListener);
+		HomePage.addActionListener(menuItemListener);
 		ListVideo.addActionListener(menuItemListener);
+		Library.addActionListener(menuItemListener);
 		Help.addActionListener(menuItemListener);
 
 	}
@@ -305,16 +318,24 @@ public class ListVideo {
 
 		public void actionPerformed(ActionEvent e) {
 			// Kiêm tra khi click vào các menuItem
-			if (e.getSource() == Home) {
+			if (e.getSource() == HomePage) {
 				Home home = new Home();
 				home.frmHome.setVisible(true);
-				// frmListVideo.setVisible(false);
+				System.out.println("Home Page");
+				frmListVideo.dispatchEvent(new WindowEvent(frmListVideo, WindowEvent.WINDOW_CLOSING));
 			}
 			if (e.getSource() == ListVideo) {
-				ListVideo lv = new ListVideo();
-				lv.frmListVideo.setVisible(true);
+//				System.out.println("List Video");
+//				ListVideo lv = new ListVideo();
+//				lv.frmListVideo.setVisible(true);
 			}
-
+			if (e.getSource() == Help) {
+				System.out.println("Help");
+				
+			}
+			if (e.getSource() == Library) {
+				System.out.println("Library");
+			}
 		}
 	}
 }
