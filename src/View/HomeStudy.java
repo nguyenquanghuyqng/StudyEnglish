@@ -20,6 +20,7 @@ import javax.swing.border.TitledBorder;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
+import Dao.GetListVideo;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
@@ -35,33 +36,33 @@ public class HomeStudy {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					chargerLibrairie();
-					HomeStudy window = new HomeStudy();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					chargerLibrairie();
+//					HomeStudy window = new HomeStudy();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public HomeStudy() {
+	public HomeStudy(String path) {
 
-		initialize();
+		initialize(path);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String path) {
 		frame = new JFrame("English pronunciation");
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
 		frame.getContentPane().setBackground(new Color(153, 153, 255));
@@ -142,8 +143,10 @@ public class HomeStudy {
 		// Tắt bàn phím bên trong JFrame
 		mediaPlayer.setEnableKeyInputHandling(true);
 
+		
+		
 		// Préparer le fichier
-		mediaPlayer.prepareMedia("Video/Huy.mp4");
+		mediaPlayer.prepareMedia(path);
 		// lire le fichier
 		mediaPlayer.play();
 

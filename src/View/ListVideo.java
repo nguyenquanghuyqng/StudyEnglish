@@ -3,17 +3,14 @@ package View;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.sql.ResultSet;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,13 +20,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import com.mysql.jdbc.Blob;
-import com.mysql.jdbc.PreparedStatement;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
-import com.sun.jna.platform.unix.X11.XClientMessageEvent.Data;
 
-import DB.DBConnection;
 import Dao.GetListVideo;
 import Model.Video;
 import uk.co.caprica.vlcj.binding.LibVlc;
@@ -142,7 +135,6 @@ public class ListVideo {
 			if (video.getId() == 1) {
 				lblVideo1.setText(video.getVideoname());
 				lblContent1.setText(video.getContent());
-
 				String img = video.getImage();
 				video1.setIcon(new ImageIcon(img));
 			} else {
@@ -160,6 +152,7 @@ public class ListVideo {
 					}
 				}
 			}
+			
 		}
 
 		// Bắt sự kiện click
@@ -192,7 +185,82 @@ public class ListVideo {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				chargerLibrairie();
-				HomeStudy hs = new HomeStudy();
+				String path = GetListVideo.GetPathVideo(1);
+				System.out.println(path);
+				HomeStudy hs = new HomeStudy(path);
+				hs.frame.setVisible(true);
+				frmListVideo.dispatchEvent(new WindowEvent(frmListVideo, WindowEvent.WINDOW_CLOSING));
+			}
+		});
+		
+		lblVideo2.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				chargerLibrairie();
+				String path = GetListVideo.GetPathVideo(2);
+				System.out.println(path);
+				HomeStudy hs = new HomeStudy(path);
+				hs.frame.setVisible(true);
+				frmListVideo.dispatchEvent(new WindowEvent(frmListVideo, WindowEvent.WINDOW_CLOSING));
+			}
+		});
+		
+		lblVideo3.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				chargerLibrairie();
+				String path = GetListVideo.GetPathVideo(3);
+				HomeStudy hs = new HomeStudy(path);
 				hs.frame.setVisible(true);
 				frmListVideo.dispatchEvent(new WindowEvent(frmListVideo, WindowEvent.WINDOW_CLOSING));
 			}

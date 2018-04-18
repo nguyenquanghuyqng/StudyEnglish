@@ -77,8 +77,7 @@ public class Home {
 			public void actionPerformed(ActionEvent e) {
 				ListVideo lv = new ListVideo();
 				lv.frmListVideo.setVisible(true);
-				Home hp = new Home();
-				hp.frmHome.dispatchEvent(new WindowEvent(frmHome, WindowEvent.WINDOW_CLOSING));
+				frmHome.dispatchEvent(new WindowEvent(frmHome, WindowEvent.WINDOW_CLOSING));
 			}
 		});
 	}
