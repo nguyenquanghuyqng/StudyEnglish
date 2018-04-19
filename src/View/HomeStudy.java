@@ -17,20 +17,22 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.JProgressBar;
 import javax.swing.border.TitledBorder;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
-import Dao.GetListVideo;
-import View.ListVideo.MenuItemListener;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.player.embedded.windows.Win32FullScreenStrategy;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 import uk.co.caprica.vlcj.runtime.x.LibXUtil;
+
+import javax.swing.JProgressBar;
+import javax.swing.Timer;
+import java.awt.event.ActionListener;
 
 public class HomeStudy {
 
@@ -39,6 +41,13 @@ public class HomeStudy {
 	JMenu Home, Video, About;
 	JMenuItem HomePage, ListVideo, Library, Help;
 	int t = 0; // Biến để play video or pause video
+
+	Timer timerVideo;
+	JProgressBar progressBar = new JProgressBar();
+
+	static final int MY_MINIMUM = 0;
+	static final int MY_MAXIMUM = 100;
+	int timeOfVideo;
 
 	/**
 	 * Launch the application.
@@ -116,16 +125,25 @@ public class HomeStudy {
 		HomeP.add(VideoP, BorderLayout.CENTER);
 		// VideoP.setLayout(null);
 
+		progressBar = new JProgressBar();
+		progressBar.setBounds(12, 320, 470, 10);
+		HomeP.add(progressBar);
+
+		JLabel time = new JLabel();
+		time.setBounds(20, 330, 70, 30);
+		time.setText("00:00");
+		HomeP.add(time);
+
 		JLabel lblbackward = new JLabel(new ImageIcon("Images/backward.png"));
-		lblbackward.setBounds(40, 330, 32, 32);
+		lblbackward.setBounds(60, 330, 32, 32);
 		HomeP.add(lblbackward);
 
 		JLabel lblPlay = new JLabel(new ImageIcon("Images/pause.png"));
-		lblPlay.setBounds(100, 330, 32, 32);
+		lblPlay.setBounds(120, 330, 32, 32);
 		HomeP.add(lblPlay);
 
 		JLabel lblforward = new JLabel(new ImageIcon("Images/forward.png"));
-		lblforward.setBounds(160, 330, 32, 32);
+		lblforward.setBounds(180, 330, 32, 32);
 		HomeP.add(lblforward);
 
 		JPanel Sub = new JPanel();
@@ -133,6 +151,11 @@ public class HomeStudy {
 		Sub.setBounds(490, 22, 260, 377);
 		HomeP.add(Sub);
 		Sub.setLayout(null);
+
+		JPanel control = new JPanel();
+		control.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		control.setBounds(12, 320, 470, 50);
+		HomeP.add(control);
 
 		// Khởi tạo MediaPlayerFactory
 		MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory();
@@ -152,7 +175,59 @@ public class HomeStudy {
 		// Préparer le fichier
 		mediaPlayer.prepareMedia(path);
 		// lire le fichier
-		mediaPlayer.play();
+		mediaPlayer.start();
+
+		// Su kien timer
+		long t1 = mediaPlayer.getLength();
+		long t3 = t1 / 1000;
+		int t2 = (int) (long) t1;
+		int t4 = (int) (long) t3;
+		System.out.println(t4+"thoi gian");
+
+		progressBar.setMinimum(0);
+		progressBar.setMaximum(t4);
+
+		timerVideo = new Timer(1000, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int val = progressBar.getValue();
+				if (val >= progressBar.getMaximum()) {
+					// timer.stop();
+					//mediaPlayer.stop();
+					lblPlay.setIcon(new ImageIcon("Images/pause.png"));
+					return;
+				}
+				progressBar.setValue(++val);
+				int s = progressBar.getValue();
+				if (s < 60) {
+					if (s < 10) {
+						time.setText("00:0" + String.valueOf(s));
+					} else {
+						time.setText("00:" + String.valueOf(s));
+					}
+				} else {
+					int p = s / 60;
+					s = s % 60;
+					if (s < 10 && p < 10) {
+						time.setText("0" + String.valueOf(p) + ":0" + String.valueOf(s));
+					} else {
+						if (s > 10 && p < 10) {
+							time.setText("0" + String.valueOf(p) + ":" + String.valueOf(s));
+						} else {
+							if (s > 10 && p >= 10) {
+								time.setText(String.valueOf(p) + ":0" + String.valueOf(s));
+							} else {
+								time.setText(String.valueOf(p) + ":" + String.valueOf(s));
+							}
+						}
+					}
+					time.setText(String.valueOf(p) + ":" + String.valueOf(s));
+				}
+			}
+		});
+		timerVideo.start();
 
 		// Sự kiện play or pause video
 		lblPlay.addMouseListener(new MouseListener() {
@@ -186,10 +261,12 @@ public class HomeStudy {
 				if (t == 0) {
 					lblPlay.setIcon(new ImageIcon("Images/play.png"));
 					mediaPlayer.pause();
+					timerVideo.stop();
 					t = 1;
 				} else if (t == 1) {
 					lblPlay.setIcon(new ImageIcon("Images/pause.png"));
 					mediaPlayer.play();
+					timerVideo.start();
 					t = 0;
 				}
 			}
@@ -328,7 +405,7 @@ public class HomeStudy {
 			}
 			if (e.getSource() == Help) {
 				System.out.println("Help");
-				
+
 			}
 			if (e.getSource() == Library) {
 				System.out.println("Library");
