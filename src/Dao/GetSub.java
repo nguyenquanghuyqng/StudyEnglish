@@ -8,7 +8,6 @@ import java.util.List;
 
 import DB.DBConnection;
 import Model.Sub;
-import Model.Video;
 
 public class GetSub {
 
@@ -20,7 +19,7 @@ public class GetSub {
 
 	}
 
-	public static List<Sub> GetListSub() {
+	public static List<Sub> GetListSub(int id) {
 		List<Sub> listsub = new ArrayList<Sub>();
 
 		// Khai báo biến cho thực hiện truy vấn
@@ -30,7 +29,36 @@ public class GetSub {
 			// TODO: handle exception
 			System.err.println("Can not connect :" + e);
 		}
-		String sql = "Select * From sub";
+		String sql = "Select content From sub where video_id="+id+"" ;
+		
+		try {
+			// Chuẩn bị câu lệnh truy vấn
+			stmt = conn.prepareStatement(sql);
+			// Thực hiện câu lệnh truy vấn
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				
+				Sub sub = new Sub();
+				sub.setContent(rs.getString("content"));
+				listsub.add(sub);
+			}
+		} catch (Exception ex) {
+			System.err.println("Error get data video" + ex);
+		}
+
+		return listsub;
+	}
+	public static List<Sub> GetListTime(int id) {
+		List<Sub> listtime = new ArrayList<Sub>();
+
+		// Khai báo biến cho thực hiện truy vấn
+		try {
+			conn = DBConnection.getConnection();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println("Can not connect :" + e);
+		}
+		String sql = "Select time From sub where video_id="+id+"" ;
 		
 		try {
 			// Chuẩn bị câu lệnh truy vấn
@@ -41,18 +69,14 @@ public class GetSub {
 				
 				Sub sub = new Sub();
 				
-				sub.setId(rs.getInt("id"));
-				sub.setContent(rs.getString("content"));
-				sub.setContent_internation(rs.getString("content_internation"));
-				sub.setTime(rs.getTime("time"));
-				sub.setId(rs.getInt("video_id"));
+				sub.setTime(rs.getString("time"));
 				
-				listsub.add(sub);
+				listtime.add(sub);
 			}
 		} catch (Exception ex) {
 			System.err.println("Error get data video" + ex);
 		}
 
-		return listsub;
+		return listtime;
 	}
 }

@@ -9,30 +9,32 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
 
+import Dao.GetSub;
+import Model.Sub;
 import uk.co.caprica.vlcj.binding.LibVlc;
 import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.player.embedded.windows.Win32FullScreenStrategy;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 import uk.co.caprica.vlcj.runtime.x.LibXUtil;
-
-import javax.swing.JProgressBar;
-import javax.swing.Timer;
-import java.awt.event.ActionListener;
 
 public class HomeStudy {
 
@@ -78,28 +80,19 @@ public class HomeStudy {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(String path) {
+
+		List<Sub> lsubtime = GetSub.GetListTime(1);
+		List<Sub> lsubtsub = GetSub.GetListSub(1);
+
 		frame = new JFrame("English pronunciation");
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 18));
 		frame.getContentPane().setBackground(new Color(153, 153, 255));
 		frame.setBounds(300, 80, 800, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-
-		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
-
-		JMenu mnHome = new JMenu("Home");
-		menuBar.add(mnHome);
-
-		JMenu mnListVideo = new JMenu("List Video");
-		menuBar.add(mnListVideo);
-
-		JMenu mnAbout = new JMenu("About");
-		menuBar.add(mnAbout);
-
-		JMenuItem mntmHelp = new JMenuItem("Help");
-		mnAbout.add(mntmHelp);
+		
 
 		// Panel
 		JPanel HomeP = new JPanel();
@@ -129,6 +122,7 @@ public class HomeStudy {
 		progressBar.setBounds(12, 320, 470, 10);
 		HomeP.add(progressBar);
 
+		// Lable timer
 		JLabel time = new JLabel();
 		time.setBounds(20, 330, 70, 30);
 		time.setText("00:00");
@@ -146,11 +140,12 @@ public class HomeStudy {
 		lblforward.setBounds(180, 330, 32, 32);
 		HomeP.add(lblforward);
 
-		JPanel Sub = new JPanel();
-		Sub.setBorder(new TitledBorder(null, "Sub", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		Sub.setBounds(490, 22, 260, 377);
-		HomeP.add(Sub);
-		Sub.setLayout(null);
+		// Nơi chứa Sub
+		JPanel SubP = new JPanel();
+		SubP.setBorder(new TitledBorder(null, "Sub", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		SubP.setBounds(490, 22, 260, 377);
+		HomeP.add(SubP);
+//		SubP.setLayout(null);
 
 		JPanel control = new JPanel();
 		control.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -182,7 +177,7 @@ public class HomeStudy {
 		long t3 = t1 / 1000;
 		int t2 = (int) (long) t1;
 		int t4 = (int) (long) t3;
-		System.out.println(t4+"thoi gian");
+		System.out.println(t4 + "thoi gian");
 
 		progressBar.setMinimum(0);
 		progressBar.setMaximum(t4);
@@ -195,7 +190,7 @@ public class HomeStudy {
 				int val = progressBar.getValue();
 				if (val >= progressBar.getMaximum()) {
 					// timer.stop();
-					//mediaPlayer.stop();
+					// mediaPlayer.stop();
 					lblPlay.setIcon(new ImageIcon("Images/pause.png"));
 					return;
 				}
@@ -338,6 +333,24 @@ public class HomeStudy {
 
 			}
 		});
+
+		// Sub
+		// final DefaultListModel<String> l1 = new DefaultListModel<>();
+		// for (Sub s : lsubtime) {
+		// l1.addElement(s.getTime());
+		// System.out.println(s.getTime());
+		// }
+		// JList<String> listsubtime = new JList<>(l1);
+		// listsubtime.setBounds(300, 25, 50, 300);
+		// SubP.add(listsubtime);
+		final DefaultListModel<String> l1 = new DefaultListModel<>();
+		for (Sub s : lsubtsub) {
+			l1.addElement(s.getContent());
+			System.out.println(s.getContent());
+		}
+		JList<String> listsub = new JList<>(l1);
+		listsub.setBounds(500, 25, 200, 100);
+		SubP.add(listsub);
 
 		JMenuBar mb = new JMenuBar(); // Tạo ra một menuBar
 

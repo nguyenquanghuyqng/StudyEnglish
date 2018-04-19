@@ -7,10 +7,10 @@ public class Sub {
 	private int id;
 	private String content;
 	private String content_internation;
-	private Time time;
+	private String time;
 	private int video_id;
 
-	public Sub(int id, String content, String content_internation, Time time, int video_id) {
+	public Sub(int id, String content, String content_internation, String time, int video_id) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -47,11 +47,11 @@ public class Sub {
 		this.content_internation = content_internation;
 	}
 
-	public Time getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Time time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 

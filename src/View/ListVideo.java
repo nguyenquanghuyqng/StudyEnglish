@@ -74,13 +74,14 @@ public class ListVideo {
 		frmListVideo.setBounds(300, 80, 800, 500);
 		frmListVideo.getContentPane().setLayout(null);
 		frmListVideo.setLocationRelativeTo(null);
+		frmListVideo.setResizable(false);
 
 		// Panel
 		JPanel HomeP = new JPanel();
 		HomeP.setBackground(new Color(224, 255, 255));
 		HomeP.setBorder(new TitledBorder(null, "List video", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		HomeP.setFont(new Font("Tahoma", Font.BOLD, 20));
-		HomeP.setBounds(10, 11, 764, 418);
+		HomeP.setBounds(10, 11, 772, 425);
 		frmListVideo.getContentPane().add(HomeP);
 		HomeP.setLayout(null);
 
