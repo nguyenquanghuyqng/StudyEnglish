@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/DB/DBConnection.java=UTF-8
+encoding//src/Dao/GetListVideo.java=UTF-8
+encoding//src/Dao/GetSub.java=UTF-8
 encoding//src/View/Home.java=UTF-8
 encoding//src/View/HomeStudy.java=UTF-8
 encoding//src/View/ListVideo.java=UTF-8
